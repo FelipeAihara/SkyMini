@@ -1,0 +1,36 @@
+/*
+ * Fase 2 do SkyMini: I2C para a IMU BMI160 e PWM (LEDC) para os 4 motores
+ * brushed. Pinos escolhidos com o usuário -- ajuste aqui se a fiação real
+ * da sua placa for diferente.
+ *
+ *   I2C0 (BMI160):  SDA = GPIO6, SCL = GPIO7
+ *   Motores (LEDC):
+ *     M1 (frente-esquerda) = GPIO2  (canal 0)
+ *     M2 (frente-direita)  = GPIO3  (canal 1)
+ *     M3 (trás-esquerda)   = GPIO10 (canal 2)
+ *     M4 (trás-direita)    = GPIO11 (canal 3)
+ */
+
+#include <zephyr/dt-bindings/pinctrl/esp32c6-pinctrl.h>
+
+&pinctrl {
+	i2c0_default: i2c0_default {
+		group1 {
+			pinmux = <I2C0_SDA_GPIO6>,
+				 <I2C0_SCL_GPIO7>;
+			bias-pull-up;
+			drive-open-drain;
+			output-high;
+		};
+	};
+
+	ledc0_default: ledc0_default {
+		group1 {
+			pinmux = <LEDC_CH0_GPIO2>,
+				 <LEDC_CH1_GPIO3>,
+				 <LEDC_CH2_GPIO10>,
+				 <LEDC_CH3_GPIO11>;
+			output-enable;
+		};
+	};
+};

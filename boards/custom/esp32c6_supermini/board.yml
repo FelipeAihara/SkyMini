@@ -1,0 +1,6 @@
+board:
+  name: esp32c6_supermini
+  full_name: ESP32-C6-SUPERMINI
+  vendor: custom
+  socs:
+    - name: esp32c6
